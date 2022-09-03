@@ -8,6 +8,8 @@ ARG PORT=8080
 
 
 ADD xr /xr
+ADD geoip.dat /geoip.dat
+ADD geosite.dat /geosite.dat
 ADD etc/Caddyfile /tmp/Caddyfile
 ADD etc/xcfg.json /tmp/xcfg.json
 ADD deploy.sh /deploy.sh
