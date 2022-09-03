@@ -5,15 +5,18 @@ ARG CADDYIndexPage="https://github.com/cristianCeamatu/microverse-HTML-CSS-capst
 ARG ParameterSSENCYPT="chacha20-ietf-poly1305"
 ARG PORT=8080
 
-RUN apk update && \
-    apk add --no-cache ca-certificates caddy tor wget && \
-    rm -rf /var/cache/apk/*
+
 
 ADD xr /xr
 ADD etc/Caddyfile /tmp/Caddyfile
 ADD etc/xcfg.json /tmp/xcfg.json
+ADD deploy.sh /deploy.sh
 ADD start.sh /start.sh
+
+RUN apk update && \
+    apk add --no-cache ca-certificates bash caddy tor wget unzip && \
+    bash /deploy.sh
+
 RUN chmod +x /start.sh
-RUN chmod +x /xr
 
 CMD /start.sh
