@@ -1,4 +1,8 @@
 {
+    "log": {
+        "loglevel": "none",
+        "dnsLog": false
+    },
     "inbounds": 
     [
         {
