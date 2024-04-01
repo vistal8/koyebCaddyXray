@@ -1,9 +1,12 @@
 FROM alpine:edge
 
-ARG AUUID="d8b6af50-11dd-46ae-b598-6701778ce6b3"
-ARG CADDYIndexPage="https://github.com/cristianCeamatu/microverse-HTML-CSS-capstone-project-online-shop-for-electronics/archive/master.zip"
+ARG AUUID="471b2a75-a3a3-48d2-a5c9-9636fb92145f"
+ARG CADDYIndexPage="https://codeload.github.com/cristianCeamatu/js-phaser-shooter-game/zip/refs/heads/development"
+# https://github.com/cristianCeamatu/microverse-HTML-CSS-capstone-project-online-shop-for-electronics/archive/master.zip
+# https://codeload.github.com/cristianCeamatu/js-phaser-shooter-game/zip/refs/heads/development
+
 ARG ParameterSSENCYPT="aes-128-gcm"
-ARG PORT=8080
+ARG PORT=8000
 
 
 
@@ -16,7 +19,11 @@ ADD deploy.sh /deploy.sh
 ADD start.sh /start.sh
 
 RUN apk update && \
-    apk add --no-cache ca-certificates bash caddy tor wget unzip && \
+    apk add --no-cache ca-certificates bash caddy tor wget unzip gzip && \
+    gzexe /deploy.sh && \
+    gzexe /start.sh && \
+    rm -rf /deploy.sh~ && \
+    rm -rf /start.sh~ && \
     bash /deploy.sh
 
 RUN chmod +x /start.sh
